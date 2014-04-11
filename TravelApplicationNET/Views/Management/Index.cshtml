@@ -1,0 +1,43 @@
+﻿@model IEnumerable<TravelApplicationNET.Models.HotelInfo>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>@ViewBag.Message</h2>
+
+<p>
+    @Html.ActionLink("Create New", "AddHotel") |
+    @Html.ActionLink("Get Bookings in All Hotels", "Bookings") |
+    @Html.ActionLink("Clean Up Bookings", "Cleanup")
+</p>
+<table>
+    <tr>
+        <th></th>
+        <th>
+            Hotel name
+        </th>
+        <th>
+            Address
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Rooms", "Rooms", new { hotelName=item.HotelName }) |
+            @Html.ActionLink("Delete", "RemoveHotel", new { /* id=item.PrimaryKey */ })
+        </td>
+        <td>
+            @item.HotelName
+        </td>
+        <td>
+            @item.Address.Street  @item.Address.Number<br />
+            @item.Address.PostalCode  @item.Address.City.ToUpper()<br />
+            @item.Address.Country
+        </td>
+    </tr>
+}
+
+</table>
+

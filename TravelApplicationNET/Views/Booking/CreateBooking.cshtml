@@ -1,0 +1,78 @@
+﻿@model TravelApplicationNET.Models.BookingConstraints
+
+@{
+    ViewBag.Title = "CreateBooking";
+    var hotel = @Context.Request.Params.Get(0);
+}
+
+<h2>@ViewBag.Message</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Booking constraints</legend>
+
+        <div class="editor-label">
+            @Html.Label("hotelName", @hotel)
+        </div>
+
+        <div class="editor-label">
+            @Html.Label("guest", "Guest name")
+        </div>
+        <div class="editor-field">
+            @Html.Editor("guest")
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StartDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.StartDate)
+            @Html.ValidationMessageFor(model => model.StartDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EndDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EndDate)
+            @Html.ValidationMessageFor(model => model.EndDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.NbOfBeds)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.NbOfBeds)
+            @Html.ValidationMessageFor(model => model.NbOfBeds)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MaxPricePerNight)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.MaxPricePerNight)
+            @Html.ValidationMessageFor(model => model.MaxPricePerNight)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SmokingAllowed)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SmokingAllowed)
+            @Html.ValidationMessageFor(model => model.SmokingAllowed)
+        </div>
+
+        <p>
+            <input type="submit" value="Book room" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+

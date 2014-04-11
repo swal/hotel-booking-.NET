@@ -1,0 +1,59 @@
+﻿@model IEnumerable<TravelApplicationNET.Models.Booking>
+
+@{
+    ViewBag.Title = "Bookings";
+}
+
+<h2>@ViewBag.Message</h2>
+
+<table>
+    <tr>
+        <th></th>
+        <th>
+            Hotel name
+        </th>
+        <th>
+            Room number
+        </th>
+        <th>
+            Guest
+        </th>
+        <th>
+            Start date
+        </th>
+        <th>
+            End date
+        </th>
+        <th>
+            Price
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Delete", "RemoveBooking", new { id=item.BookingID })
+        </td>
+        <td>
+            @item.HotelName
+        </td>
+        <td>
+            @item.RoomNb
+        </td>
+        <td>
+            @item.Guest
+        </td>
+        <td>
+            @String.Format("{0:g}", item.StartDate)
+        </td>
+        <td>
+            @String.Format("{0:g}", item.EndDate)
+        </td>
+        <td>
+            @String.Format("{0:F}", item.Price)
+        </td>
+    </tr>
+}
+
+</table>
+

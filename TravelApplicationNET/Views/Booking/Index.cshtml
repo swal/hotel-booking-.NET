@@ -1,0 +1,69 @@
+﻿@model IEnumerable<TravelApplicationNET.Models.Booking>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>@ViewBag.Message</h2>
+
+<p>
+    @Html.ActionLink("Create New Booking", "Search")
+</p>
+@if (Model.Count() > 0)
+{
+    <h4>Tentative bookings:</h4>
+    <table>
+        <tr>
+            <th>
+                Hotel name
+            </th>
+            <th>
+                Room number
+            </th>
+            <th>
+                Guest name
+            </th>
+            <th>
+                Start date
+            </th>
+            <th>
+                End date
+            </th>
+            <th>
+                Total price (€)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.HotelName
+            </td>
+            <td>
+                @item.RoomNb
+            </td>
+            <td>
+                @item.Guest
+            </td>
+            <td>
+                @String.Format("{0:g}", item.StartDate)
+            </td>
+            <td>
+                @String.Format("{0:g}", item.EndDate)
+            </td>
+            <td>
+                @String.Format("{0:F}", item.Price)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { booking = item.GetHashCode() })
+            </td>
+        </tr>
+    }
+
+    </table>
+    <p>
+    @Html.ActionLink("Finalize Bookings", "Finalize")
+</p> 
+}

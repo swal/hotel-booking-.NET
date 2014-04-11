@@ -1,0 +1,62 @@
+﻿@model IEnumerable<TravelApplicationNET.Models.Booking>
+
+@{
+    ViewBag.Title = "Finalize";
+}
+
+@if (Model == null)
+{
+    <h2><font color="red">@ViewContext.ViewData.ModelState[string.Empty].Errors.First().ErrorMessage</font></h2>
+}
+else
+{
+<h2>@ViewBag.Message</h2>
+
+<table>
+    <tr>
+        <th>
+            HotelName
+        </th>
+        <th>
+            RoomNb
+        </th>
+        <th>
+            StartDate
+        </th>
+        <th>
+            EndDate
+        </th>
+        <th>
+            Price
+        </th>
+        <th>
+            Guest
+        </th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @item.HotelName
+        </td>
+        <td>
+            @item.RoomNb
+        </td>
+        <td>
+            @String.Format("{0:g}", item.StartDate)
+        </td>
+        <td>
+            @String.Format("{0:g}", item.EndDate)
+        </td>
+        <td>
+            @String.Format("{0:F}", item.Price)
+        </td>
+        <td>
+            @item.Guest
+        </td>
+    </tr>
+}
+
+</table>
+}

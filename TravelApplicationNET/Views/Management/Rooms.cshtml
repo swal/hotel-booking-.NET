@@ -1,0 +1,60 @@
+﻿@model IEnumerable<TravelApplicationNET.Models.RoomDetails>
+
+@{
+    ViewBag.Title = "Rooms";
+    var hotel = @Context.Request.Params.Get(0);
+}
+
+<h2>@ViewBag.Message</h2>
+
+<p>
+    @Html.ActionLink("Create New", "AddRoom", new { hotelName=@hotel }) |
+    @Html.ActionLink("Get Bookings in "+@hotel, "Bookings", new { hotelName=@hotel })
+</p>
+<table>
+    <tr>
+        <th></th>
+        <th>
+            Room number
+        </th>
+        <th>
+            Number of beds
+        </th>
+        <th>
+            Price per night (€)
+        </th>
+        <th>
+            Smoking
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Bookings", "Bookings", new { hotelName=@hotel, roomNb=item.RoomNb }) |
+            @Html.ActionLink("Delete", "RemoveRoom", new { id=item.RoomDetailsID })
+        </td>
+        <td>
+            @item.RoomNb
+        </td>
+        <td>
+            @item.NbOfBeds
+        </td>
+        <td>
+            @String.Format("{0:F}", item.PricePerNight)
+        </td>
+        <td>
+            @if (item.SmokingAllowed)
+            {
+                <text>Allowed</text>
+            }
+            else
+            {
+                <text>Not allowed</text>
+            }
+        </td>
+    </tr>
+}
+
+</table>
+
